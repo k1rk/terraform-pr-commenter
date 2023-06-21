@@ -62,7 +62,7 @@ jobs:
   commenter-test:
     name: Test Commenter
     runs-on: ubuntu-latest
-    needs: set-outputs
+    #needs: set-outputs
     steps:
       - uses: actions/checkout@v3
         if: ${{ env.TESTING == 'true' }}
