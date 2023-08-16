@@ -16,7 +16,7 @@ make_and_post_payload() {
 make_details_with_header() {
   local header="### $1"
   if [[ ! -z $PROJECT ]]; then
-    header="## **$PROJECT**
+    header="## Project: **$PROJECT**
 $header"
   fi
   local body=$2
@@ -113,7 +113,7 @@ delete_existing_comments() {
   local last_page
 
   if [[ ! -z $PROJECT ]]; then
-    regex="## **$PROJECT**\n$regex"
+    regex="## Project: **$PROJECT**\n$regex"
   fi
 
   debug "Type: $type"
