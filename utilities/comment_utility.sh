@@ -40,7 +40,8 @@ $body
 }
 
 post_comment() {
-  curl -sS -L -X POST -H "$ACCEPT_HEADER" -H "$AUTH_HEADER" -H "$CONTENT_HEADER" "$PR_COMMENTS_URL" -d "$pr_payload"
+  comment_id=$(curl -sS -L -X POST -H "$ACCEPT_HEADER" -H "$AUTH_HEADER" -H "$CONTENT_HEADER" "$PR_COMMENTS_URL" -d "$pr_payload" | jq -r ".id")
+  echo "comment_id=$comment_id" >>$GITHUB_OUTPUT
 }
 
 ### DIFF AND STRING SUBSTITUTION UTILITIES ###

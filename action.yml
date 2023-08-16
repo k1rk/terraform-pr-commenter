@@ -28,6 +28,9 @@ inputs:
   project:
     description: project name to use in the comment
     required: false
+outputs:
+  comment_id: # id of the comment
+    description: 'ID of created comment'
 runs:
   using: "composite"
   steps:
