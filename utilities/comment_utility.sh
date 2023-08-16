@@ -40,8 +40,7 @@ $body
 }
 
 post_comment() {
-  local ouptut=curl -sS -L -X POST -H "$ACCEPT_HEADER" -H "$AUTH_HEADER" -H "$CONTENT_HEADER" "$PR_COMMENTS_URL" -d "$pr_payload"
-  echo $ouptut
+  curl -sS -L -X POST -H "$ACCEPT_HEADER" -H "$AUTH_HEADER" -H "$CONTENT_HEADER" "$PR_COMMENTS_URL" -d "$pr_payload"
 }
 
 ### DIFF AND STRING SUBSTITUTION UTILITIES ###

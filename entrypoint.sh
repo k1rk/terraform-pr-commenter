@@ -14,34 +14,27 @@ fi
 validate_inputs "$@"
 parse_args "$@"
 
-output=""
-
 if [[ $COMMAND == 'fmt' ]]; then
-  output=execute_fmt
+  execute_fmt
   exit 0
 fi
 
 if [[ $COMMAND == 'init' ]]; then
-  output=execute_init
+  execute_init
   exit 0
 fi
 
 if [[ $COMMAND == 'plan' ]]; then
-  output=execute_plan
+  execute_plan
   exit 0
 fi
 
 if [[ $COMMAND == 'validate' ]]; then
-  output=execute_validate
+  execute_validate
   exit 0
 fi
 
 if [[ $COMMAND == 'tflint' ]]; then
-  output=execute_tflint
+  execute_tflint
   exit 0
-fi
-
-if [[ ! -z $output ]]; then
-  comment_id="$output | jq -r '.id'"
-  echo "comment_id=$comment_id" >>$GITHUB_OUTPUT
 fi
