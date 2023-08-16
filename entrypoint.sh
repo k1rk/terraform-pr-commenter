@@ -14,7 +14,7 @@ fi
 validate_inputs "$@"
 parse_args "$@"
 
-local output
+output=""
 
 if [[ $COMMAND == 'fmt' ]]; then
   execute_fmt >>$output
@@ -42,6 +42,6 @@ if [[ $COMMAND == 'tflint' ]]; then
 fi
 
 if [[ ! -z $output ]]; then
-  local comment_id="$output | jq -r '.id'"
+  comment_id="$output | jq -r '.id'"
   echo "comment_id=$comment_id" >>$GITHUB_OUTPUT
 fi

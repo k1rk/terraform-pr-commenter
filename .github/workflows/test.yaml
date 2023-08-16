@@ -83,6 +83,17 @@ jobs:
           #commenter_plan_path: ./testing/text-files/tf_plan_success_with_outputs.txt
           commenter_exitcode: 2
           use_beta_version: "true"
-          # project: dev-team-1
+          project: dev-team-1
+      - name: Test-project-2
+        if: ${{ env.TESTING == 'true' }}
+        uses: k1rk/terraform-pr-commenter@monorepo #set to your branch for testing and switch back to v3-beta when done.
+        with:
+          commenter_type: plan
+          # Should only be setting commenter_input or commenter_plan_path (commenter_plan_path only for plan commenter type)
+          commenter_input: ${{ needs.set-outputs.outputs.tf_plan_success_with_outputs }}
+          #commenter_plan_path: ./testing/text-files/tf_plan_success_with_outputs.txt
+          commenter_exitcode: 2
+          use_beta_version: "true"
+          project: dev-team-2
       - name: print output
         run: echo "${{ steps.test.outputs.comment_id }}"
