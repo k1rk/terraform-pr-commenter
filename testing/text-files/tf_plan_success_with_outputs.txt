@@ -157,7 +157,7 @@ Terraform will perform the following actions:
 Changes to Outputs:
   [32m+[0m[0m test_output                     = [
       [32m+[0m[0m [
-          [32m+[0m[0m "my-tf-test-bucket-100",
+          [32m+[0m[0m "my-tf-test-bucket-0",
           [32m+[0m[0m "my-tf-test-bucket-1",
           [32m+[0m[0m "my-tf-test-bucket-2",
           [32m+[0m[0m "my-tf-test-bucket-3",
