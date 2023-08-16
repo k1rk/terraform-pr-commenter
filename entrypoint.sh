@@ -17,27 +17,27 @@ parse_args "$@"
 output=""
 
 if [[ $COMMAND == 'fmt' ]]; then
-  execute_fmt >>$output
+  output=execute_fmt
   exit 0
 fi
 
 if [[ $COMMAND == 'init' ]]; then
-  execute_init >>$output
+  output=execute_init
   exit 0
 fi
 
 if [[ $COMMAND == 'plan' ]]; then
-  execute_plan >>$output
+  output=execute_plan
   exit 0
 fi
 
 if [[ $COMMAND == 'validate' ]]; then
-  execute_validate >>$output
+  output=execute_validate
   exit 0
 fi
 
 if [[ $COMMAND == 'tflint' ]]; then
-  execute_tflint >>$output
+  output=execute_tflint
   exit 0
 fi
 
