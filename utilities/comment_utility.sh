@@ -113,7 +113,7 @@ delete_existing_comments() {
   local last_page
 
   if [[ ! -z $PROJECT ]]; then
-    regex="## Project: **$PROJECT**\n$regex"
+    regex="## Project: **$PROJECT**\\n$regex"
   fi
 
   debug "Type: $type"
