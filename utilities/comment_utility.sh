@@ -122,7 +122,7 @@ delete_existing_comments() {
 
   local jq='.[] | select(.body|test ("'
   jq+=$regex
-  jq+='")) | .id'
+  jq+='", "m")) | .id'
 
   # gross, but... bash.
   get_page_count PAGE_COUNT
