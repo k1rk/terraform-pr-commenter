@@ -39,4 +39,4 @@ if [[ $COMMAND == 'tflint' ]]; then
   exit 0
 fi
 
-echo "comment_id=max" >>$GITHUB_OUTPUT
+echo "comment_id=max" >>/github-ouput

@@ -76,6 +76,7 @@ runs:
         -e COMMENTER_PLAN_FILE \
         -e COMMENTER_POST_PLAN_OUTPUTS \
         -v "$(pwd)"/:/workspace \
+        -v "$GITHUB_OUTPUT":/github-ouput \
         commenter ${{ inputs.commenter_type }} ${{ inputs.commenter_exitcode }}
       shell: bash
     - name: Run commenter image (non-plan)
@@ -96,12 +97,9 @@ runs:
         -e COMMENTER_INPUT \
         -e COMMENTER_DEBUG \
         -e COMMENTER_ECHO \
+        -v "$GITHUB_OUTPUT":/github-ouput \
         commenter ${{ inputs.commenter_type }} ${{ inputs.commenter_exitcode }}
       shell: bash
-    - name: "test-output1"
-      run: echo $GITHUB_OUTPUT
-      shell: bash
-
     - name: "test-output"
       run: echo random-number ${{ steps.commenter-plan.outputs.comment_id }}
       shell: bash
