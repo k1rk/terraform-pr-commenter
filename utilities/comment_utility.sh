@@ -16,7 +16,7 @@ make_and_post_payload() {
 make_details_with_header() {
   local header="### $1"
   if [[ ! -z $PROJECT ]]; then
-    header="## **$PROJECT**
+    header="## Project: $PROJECT
 $header"
   fi
   local body=$2
@@ -40,7 +40,9 @@ $body
 }
 
 post_comment() {
-  curl -sS -L -X POST -H "$ACCEPT_HEADER" -H "$AUTH_HEADER" -H "$CONTENT_HEADER" "$PR_COMMENTS_URL" -d "$pr_payload"
+  local comment=$(curl -sS -L -X POST -H "$ACCEPT_HEADER" -H "$AUTH_HEADER" -H "$CONTENT_HEADER" "$PR_COMMENTS_URL" -d "$pr_payload")
+  echo "comment_id=$(echo $comment | jq -r '.id')" >>/github-ouput
+  echo "comment_url=$(echo $comment | jq -r '.html_url')" >>/github-ouput
 }
 
 ### DIFF AND STRING SUBSTITUTION UTILITIES ###
@@ -113,7 +115,7 @@ delete_existing_comments() {
   local last_page
 
   if [[ ! -z $PROJECT ]]; then
-    regex="## **$PROJECT**\n$regex"
+    regex="## Project: $PROJECT\\n$regex"
   fi
 
   debug "Type: $type"

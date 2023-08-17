@@ -3,6 +3,9 @@ name: Release Beta
 on:
   pull_request:
 
+permissions:
+  contents: write
+
 jobs:
   release-beta:
     runs-on: ubuntu-latest

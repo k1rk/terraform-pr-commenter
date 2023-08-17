@@ -28,6 +28,14 @@ inputs:
   project:
     description: project name to use in the comment
     required: false
+outputs:
+  comment_id:
+    description: ID of created comment
+    value: ${{ steps.commenter-plan.outputs.comment_id || steps.commenter.outputs.comment_id }}
+  comment_url:
+    description: URL to created comment
+    value: ${{ steps.commenter-plan.outputs.comment_url || steps.commenter.outputs.comment_url }}
+
 runs:
   using: "composite"
   steps:
@@ -42,16 +50,17 @@ runs:
       shell: bash
     - name: Build commenter docker image (master)
       if: ${{ inputs.use_beta_version != 'true' }}
-      run: docker build --build-arg TERRAFORM_VERSION=${{ steps.tf_version.outputs.version }} -t commenter https://github.com/GetTerminus/terraform-pr-commenter.git#v3
+      run: docker build --build-arg TERRAFORM_VERSION=${{ steps.tf_version.outputs.version }} -t commenter https://github.com/k1rk/terraform-pr-commenter.git#v3
       shell: bash
     - name: Build commenter docker image (beta)
       if: ${{ inputs.use_beta_version == 'true' }}
       # append branch with a pound (#) if developing.  e.g., `commenter.git#my-branch`
       run: |
-        docker build --build-arg TERRAFORM_VERSION=${{ steps.tf_version.outputs.version }} -t commenter https://github.com/GetTerminus/terraform-pr-commenter.git#v3-beta
+        docker build --build-arg TERRAFORM_VERSION=${{ steps.tf_version.outputs.version }} -t commenter https://github.com/k1rk/terraform-pr-commenter.git#v3-beta
       shell: bash
     - name: Run commenter image (plan)
       if: ${{ inputs.commenter_type == 'plan' }}
+      id: commenter-plan
       env:
         COMMENTER_INPUT: ${{ inputs.commenter_input }}
         COMMENTER_PLAN_FILE: ${{ inputs.commenter_plan_path }}
@@ -71,10 +80,12 @@ runs:
         -e COMMENTER_PLAN_FILE \
         -e COMMENTER_POST_PLAN_OUTPUTS \
         -v "$(pwd)"/:/workspace \
+        -v "$GITHUB_OUTPUT":/github-ouput \
         commenter ${{ inputs.commenter_type }} ${{ inputs.commenter_exitcode }}
       shell: bash
     - name: Run commenter image (non-plan)
       if: ${{ inputs.commenter_type != 'plan' }}
+      id: commenter
       env:
         COMMENTER_INPUT: ${{ inputs.commenter_input }}
         GITHUB_EVENT: ${{ toJSON(github.event) }}
@@ -90,5 +101,6 @@ runs:
         -e COMMENTER_INPUT \
         -e COMMENTER_DEBUG \
         -e COMMENTER_ECHO \
+        -v "$GITHUB_OUTPUT":/github-ouput \
         commenter ${{ inputs.commenter_type }} ${{ inputs.commenter_exitcode }}
       shell: bash
