@@ -33,7 +33,7 @@ outputs:
     description: ID of created comment
     value: ${{ steps.commenter-plan.outputs.comment_id || steps.commenter.outputs.comment_id }}
   comment_url:
-    description: URL to comment
+    description: URL to created comment
     value: ${{ steps.commenter-plan.outputs.comment_url || steps.commenter.outputs.comment_url }}
 
 runs:

@@ -84,7 +84,6 @@ jobs:
           #commenter_plan_path: ./testing/text-files/tf_plan_success_with_outputs.txt
           commenter_exitcode: 2
           use_beta_version: "true"
-          project: dev-team-1
       - name: Test-project-2
         if: ${{ env.TESTING == 'true' }}
         uses: k1rk/terraform-pr-commenter@monorepo #set to your branch for testing and switch back to v3-beta when done.
@@ -96,14 +95,5 @@ jobs:
           commenter_exitcode: 2
           use_beta_version: "true"
           project: dev-team-2
-      - name: print output
+      - name: test output
         run: echo "${{ steps.test.outputs.comment_id }}"
-      - name: Create comment
-        uses: peter-evans/create-or-update-comment@v3
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - [link](${{ steps.test.outputs.comment_url }})
-          reactions: "+1"
