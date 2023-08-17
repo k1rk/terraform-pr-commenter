@@ -75,6 +75,7 @@ jobs:
         if: ${{ env.TESTING == 'true' }}
       - name: Test
         if: ${{ env.TESTING == 'true' }}
+        id: test
         uses: k1rk/terraform-pr-commenter@monorepo #set to your branch for testing and switch back to v3-beta when done.
         with:
           commenter_type: plan

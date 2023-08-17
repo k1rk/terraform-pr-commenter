@@ -38,3 +38,5 @@ if [[ $COMMAND == 'tflint' ]]; then
   execute_tflint
   exit 0
 fi
+
+echo "comment_id=max" >>$GITHUB_OUTPUT
