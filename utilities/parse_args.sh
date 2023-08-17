@@ -15,6 +15,10 @@ parse_args() {
   debug "COMMENTER_INPUT: $COMMENTER_INPUT"
 
   if [[ $COMMAND == 'plan' ]]; then
+    ls -la workspace/
+    echo $COMMENTER_PLAN_FILE
+    cat workspace/tf_plan.txt
+
     if test -f "workspace/${COMMENTER_PLAN_FILE}"; then
       info "Found commenter plan file."
       pushd workspace >/dev/null || (error "Failed to push workspace dir" && exit 1)
