@@ -123,8 +123,6 @@ delete_existing_comments() {
   jq+=$regex
   jq+='")) | .id'
 
-  debug "jq: $jq"
-
   # gross, but... bash.
   get_page_count PAGE_COUNT
   last_page=$PAGE_COUNT
