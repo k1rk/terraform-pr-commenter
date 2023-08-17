@@ -31,7 +31,7 @@ inputs:
 outputs:
   comment_id:
     description: ID of created comment
-    value: ${{ steps.commenter-plan.outputs.comment_id || steps.commenter.outputs.comment_id }}
+    value: "dsa"
 runs:
   using: "composite"
   steps:
