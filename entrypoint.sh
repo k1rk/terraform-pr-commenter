@@ -26,10 +26,6 @@ fi
 
 if [[ $COMMAND == 'plan' ]]; then
   execute_plan
-  ls -la /
-  ls -la /github-output
-  cat /github-ouput
-  echo "comment_id=max" >>/github-ouput
   exit 0
 fi
 

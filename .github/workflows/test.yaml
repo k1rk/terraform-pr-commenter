@@ -98,3 +98,11 @@ jobs:
           project: dev-team-2
       - name: print output
         run: echo "${{ steps.test.outputs.comment_id }}"
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** :sparkles:
+            - [link](${{ steps.test.outputs.comment_url }})
+          reactions: "+1"

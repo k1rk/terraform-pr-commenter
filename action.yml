@@ -31,7 +31,11 @@ inputs:
 outputs:
   comment_id:
     description: ID of created comment
-    value: "dsa"
+    value: ${{ steps.commenter-plan.outputs.comment_id || steps.commenter.outputs.comment_id }}
+  comment_url:
+    description: URL to comment
+    value: ${{ steps.commenter-plan.outputs.comment_url || steps.commenter.outputs.comment_url }}
+
 runs:
   using: "composite"
   steps:
@@ -99,7 +103,4 @@ runs:
         -e COMMENTER_ECHO \
         -v "$GITHUB_OUTPUT":/github-ouput \
         commenter ${{ inputs.commenter_type }} ${{ inputs.commenter_exitcode }}
-      shell: bash
-    - name: "test-output"
-      run: echo random-number ${{ steps.commenter-plan.outputs.comment_id }}
       shell: bash
