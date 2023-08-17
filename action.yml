@@ -100,4 +100,4 @@ runs:
       shell: bash
     - name: "test-output"
       run: echo random-number ${{ steps.commenter-plan.outputs.comment_id }}
-        
+      shell: bash
