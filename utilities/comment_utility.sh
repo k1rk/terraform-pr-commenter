@@ -41,8 +41,8 @@ $body
 
 post_comment() {
   local comment=$(curl -sS -L -X POST -H "$ACCEPT_HEADER" -H "$AUTH_HEADER" -H "$CONTENT_HEADER" "$PR_COMMENTS_URL" -d "$pr_payload")
-  echo "comment_id=$(echo $comment | jq '.id')" >>/github-ouput
-  echo "comment_url=$(echo $comment | jq '.html_url')" >>/github-ouput
+  echo "comment_id=$(echo $comment | jq -r '.id')" >>/github-ouput
+  echo "comment_url=$(echo $comment | jq -r '.html_url')" >>/github-ouput
 }
 
 ### DIFF AND STRING SUBSTITUTION UTILITIES ###
