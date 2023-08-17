@@ -98,6 +98,10 @@ runs:
         -e COMMENTER_ECHO \
         commenter ${{ inputs.commenter_type }} ${{ inputs.commenter_exitcode }}
       shell: bash
+    - name: "test-output1"
+      run: echo $GITHUB_OUTPUT
+      shell: bash
+
     - name: "test-output"
       run: echo random-number ${{ steps.commenter-plan.outputs.comment_id }}
       shell: bash
