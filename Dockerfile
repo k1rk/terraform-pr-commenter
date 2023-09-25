@@ -1,4 +1,4 @@
-ARG TERRAFORM_VERSION=1.4.6
+ARG TERRAFORM_VERSION=1.5.7
 FROM hashicorp/terraform:${TERRAFORM_VERSION}
 
 LABEL repository="https://github.com/GetTerminus/terraform-pr-commenter" \
@@ -9,7 +9,7 @@ LABEL repository="https://github.com/GetTerminus/terraform-pr-commenter" \
       com.github.actions.icon="git-pull-request" \
       com.github.actions.color="blue"
 
-RUN apk add --no-cache -q \
+RUN apk add --no-cache -q --upgrade \
     bash \
     curl \
     perl \
